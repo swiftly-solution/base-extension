@@ -53,15 +53,10 @@ jobs:
                   path: ${{ github.event.repository.name }}
                   submodules: recursive
 
-            - name: Checkout AMBuild
-              uses: actions/checkout@v4
+            - name: Setup XMake
+              uses: xmake-io/github-action-setup-xmake@v1
               with:
-                  repository: alliedmodders/ambuild
-                  path: ambuild
-
-            - name: Install AMBuild
-              run: |
-                  cd ambuild; python setup.py install; cd ..
+                xmake-version: latest
 
             - name: Setup Version
               shell: bash
