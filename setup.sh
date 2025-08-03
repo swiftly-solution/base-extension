@@ -1,15 +1,14 @@
 #!/bin/bash
 
-export MMSOURCE20="$(pwd)/alliedmodders/metamod"
-export HL2SDKCS2="$(pwd)/alliedmodders/hl2sdk"
+source ~/.xmake/profile
+LPATH=$(pwd)
 
-if [ ! -d build ]; then
-    mkdir build
-    cd build
-    CC=gcc CXX=g++ python ../configure.py --enable-optimize -s cs2
-    cd ..
+export HL2SDK="${LPATH}/alliedmodders/hl2sdk"
+export MMSOURCE="${LPATH}/alliedmodders/metamod"
+
+if [ -z "${GITHUB_SHA}" ]; then
+    export GITHUB_SHA=$(git rev-parse HEAD)
 fi
 
-cd build
-ambuild
-cd ..
+export XMAKE_ROOT=y
+xmake -j $(nproc) -y

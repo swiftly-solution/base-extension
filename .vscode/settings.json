@@ -67,6 +67,10 @@
         "typeinfo": "cpp",
         "any": "cpp",
         "optional": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "codecvt": "cpp",
+        "future": "cpp",
+        "typeindex": "cpp",
+        "variant": "cpp"
     }
 }

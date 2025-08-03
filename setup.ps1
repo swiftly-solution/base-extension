@@ -1,13 +1,8 @@
-$env:MMSOURCE20 = "$PSScriptRoot\alliedmodders\metamod"
-$env:HL2SDKCS2 = "$PSScriptRoot\alliedmodders\hl2sdk"
-
-if (!(Test-Path -Path "$PSScriptRoot\build")) {
-    mkdir build
-    Set-Location build
-    python ../configure.py --enable-optimize -s cs2
-    Set-Location ..
+if (-not $env:GITHUB_SHA) {
+    $env:GITHUB_SHA = (git rev-parse HEAD)
 }
 
-Set-Location build
-ambuild
-Set-Location ..
+$env:HL2SDK = "$PSScriptRoot\alliedmodders\hl2sdk"
+$env:MMSOURCE = "$PSScriptRoot\alliedmodders\metamod"
+
+xmake -j 4 -y
